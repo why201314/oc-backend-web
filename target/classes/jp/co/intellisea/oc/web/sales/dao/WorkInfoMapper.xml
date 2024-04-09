@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.intellisea.oc.web.sales.dao.WorkInfoMapper">
+  <resultMap id="BaseResultMap" type="jp.co.intellisea.oc.web.sales.entity.WorkInfo">
+    <!--@mbg.generated-->
+    <!--@Table work_info-->
+    <id column="work_info_id" jdbcType="INTEGER" property="workInfoId" />
+    <result column="employee_id" jdbcType="INTEGER" property="employeeId" />
+    <result column="start_time" jdbcType="TIME" property="startTime" />
+    <result column="end_time" jdbcType="TIME" property="endTime" />
+    <result column="append" jdbcType="VARCHAR" property="append" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    work_info_id, employee_id, start_time, end_time, append, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from work_info
+    where work_info_id = #{workInfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from work_info
+    where work_info_id = #{workInfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="jp.co.intellisea.oc.web.sales.entity.WorkInfo">
+    <!--@mbg.generated-->
+    insert into work_info (work_info_id, employee_id, start_time, 
+      end_time, append, note)
+    values (#{workInfoId,jdbcType=INTEGER}, #{employeeId,jdbcType=INTEGER}, #{startTime,jdbcType=TIME}, 
+      #{endTime,jdbcType=TIME}, #{append,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="jp.co.intellisea.oc.web.sales.entity.WorkInfo">
+    <!--@mbg.generated-->
+    insert into work_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="workInfoId != null">
+        work_info_id,
+      </if>
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="append != null">
+        append,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="workInfoId != null">
+        #{workInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIME},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIME},
+      </if>
+      <if test="append != null">
+        #{append,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="jp.co.intellisea.oc.web.sales.entity.WorkInfo">
+    <!--@mbg.generated-->
+    update work_info
+    <set>
+      <if test="employeeId != null">
+        employee_id = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIME},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIME},
+      </if>
+      <if test="append != null">
+        append = #{append,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where work_info_id = #{workInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="jp.co.intellisea.oc.web.sales.entity.WorkInfo">
+    <!--@mbg.generated-->
+    update work_info
+    set employee_id = #{employeeId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIME},
+      end_time = #{endTime,jdbcType=TIME},
+      append = #{append,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where work_info_id = #{workInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>

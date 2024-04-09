@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>取引先一覧</div>
+	<span>※すべての取引先名を表示する。(上限なし)</span>
+	
+	<form action="account_regist_init" method="get"  enctype="multipart/form-data">
+	<br /><br />
+	
+	<table class="text_center">
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>取引先名</th>
+				<th>住所1</th>
+				<th>住所2</th>
+				<th>住所3</th>
+				<th>ホームページ</th>
+				<th>上場区分</th>
+			</tr>
+		</thead>
+
+		<tr th:each="account, iStat: ${accounts}">
+			<td th:text="*{iStat.index}"></td>
+			<td th:text="*{account.name}"></td>
+			<td th:text="*{account.address1}"></td>
+			<td th:text="*{account.address2}"></td>
+			<td th:text="*{account.address3}"></td>
+			<td th:text="*{account.homepage}"></td>
+			<td th:if="${account.ipc_type == '1'}">上場</td>
+			<td th:unless="${account.ipc_type == '1'}">非上場</td>
+		</tr>
+
+	</table>
+	<div><input type="submit" value="登録へ"/></div>
+	</form>
+</body>
+</html>

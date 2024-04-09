@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>取引先検索</div>
+	
+	<form action="account_search" method="post"  enctype="multipart/form-data" th:object="${searchForm}">
+	<br /><br />
+	
+	<table>
+		<tr>
+			<td>取引先名</td><td><input th:field="*{name}" id="name" type="text" /></td>
+			
+		</tr>
+		<tr>
+			<td>住所</td><td><input th:field="*{address}" id="address" type="text" /></td>
+			
+		</tr>
+		<tr>
+			<td>ホームページ</td><td><input th:field="*{homepage}" id="homepage" type="text" /></td>
+		</tr>
+		<tr>
+			<td>電話番号</td><td><input th:field="*{phone_number}" id="phone_number" type="text" /></td>
+		</tr>
+		<tr>
+			<td>上場区分</td>
+			<td>
+				<th:block th:each="ipc : ${ipcTypes}">
+				<input name="ipc_type" id="ipc_type" type="radio" th:field="*{ipc_type}" th:value="${ipc.key}" th:text="${ipc.value}" />
+				</th:block>
+			</td>
+		</tr>
+	</table>
+	
+	<div><input type="submit" value="検索"/></div>
+	
+	<div>
+		<table th:if="${not #lists.isEmpty(accountSearchResultBeans)}">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>取引先名</th>
+					<th>住所1</th>
+					<th>住所2</th>
+					<th>住所3</th>
+					<th>ホームページ</th>
+					<th>上場区分</th>
+				</tr>
+			</thead>
+			<tr th:each="account, iStat: ${accountSearchResultBeans}">
+				<td th:text="${iStat.index}"></td>
+				<td th:text="${account.name}"></td>
+				<td th:text="${account.address1}"></td>
+				<td th:text="${account.address2}"></td>
+				<td th:text="${account.address3}"></td>
+				<td th:text="${account.homepage}"></td>
+				<td th:if="${account.ipc_type == '1'}">上場</td>
+				<td th:unless="${account.ipc_type == '1'}">非上場</td>
+			</tr>
+
+		</table>
+		<div><span th:if="${search_init == null && #lists.isEmpty(accountSearchResultBeans)}">検索結果がありません</span></div>
+	</div>
+	</form>
+</body>
+</html>

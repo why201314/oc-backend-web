@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.intellisea.oc.web.sales.dao.SalesMapper">
+  <resultMap id="BaseResultMap" type="jp.co.intellisea.oc.web.sales.entity.Sales">
+    <!--@mbg.generated-->
+    <!--@Table sales-->
+    <id column="sales_id" jdbcType="INTEGER" property="salesId" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    sales_id, company_id, content, start_date, "status", end_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sales
+    where sales_id = #{salesId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from sales
+    where sales_id = #{salesId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="jp.co.intellisea.oc.web.sales.entity.Sales">
+    <!--@mbg.generated-->
+    insert into sales (sales_id, company_id, content, 
+      start_date, "status", end_date
+      )
+    values (#{salesId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{startDate,jdbcType=DATE}, #{status,jdbcType=VARCHAR}, #{endDate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="jp.co.intellisea.oc.web.sales.entity.Sales">
+    <!--@mbg.generated-->
+    insert into sales
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="salesId != null">
+        sales_id,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="status != null">
+        "status",
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="salesId != null">
+        #{salesId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="jp.co.intellisea.oc.web.sales.entity.Sales">
+    <!--@mbg.generated-->
+    update sales
+    <set>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        "status" = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=DATE},
+      </if>
+    </set>
+    where sales_id = #{salesId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="jp.co.intellisea.oc.web.sales.entity.Sales">
+    <!--@mbg.generated-->
+    update sales
+    set company_id = #{companyId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=DATE},
+      "status" = #{status,jdbcType=VARCHAR},
+      end_date = #{endDate,jdbcType=DATE}
+    where sales_id = #{salesId,jdbcType=INTEGER}
+  </update>
+</mapper>

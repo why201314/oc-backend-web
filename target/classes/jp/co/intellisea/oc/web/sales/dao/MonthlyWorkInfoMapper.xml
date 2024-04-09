@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.intellisea.oc.web.sales.dao.MonthlyWorkInfoMapper">
+  <resultMap id="BaseResultMap" type="jp.co.intellisea.oc.web.sales.entity.MonthlyWorkInfo">
+    <!--@mbg.generated-->
+    <!--@Table monthly_work_info-->
+    <id column="monthly_work_info_id" jdbcType="INTEGER" property="monthlyWorkInfoId" />
+    <result column="employee_id" jdbcType="INTEGER" property="employeeId" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="note" jdbcType="DATE" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    monthly_work_info_id, employee_id, "date", file_path, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from monthly_work_info
+    where monthly_work_info_id = #{monthlyWorkInfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from monthly_work_info
+    where monthly_work_info_id = #{monthlyWorkInfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="jp.co.intellisea.oc.web.sales.entity.MonthlyWorkInfo">
+    <!--@mbg.generated-->
+    insert into monthly_work_info (monthly_work_info_id, employee_id, "date", 
+      file_path, note)
+    values (#{monthlyWorkInfoId,jdbcType=INTEGER}, #{employeeId,jdbcType=INTEGER}, #{date,jdbcType=DATE}, 
+      #{filePath,jdbcType=VARCHAR}, #{note,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="jp.co.intellisea.oc.web.sales.entity.MonthlyWorkInfo">
+    <!--@mbg.generated-->
+    insert into monthly_work_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthlyWorkInfoId != null">
+        monthly_work_info_id,
+      </if>
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="date != null">
+        "date",
+      </if>
+      <if test="filePath != null">
+        file_path,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthlyWorkInfoId != null">
+        #{monthlyWorkInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="jp.co.intellisea.oc.web.sales.entity.MonthlyWorkInfo">
+    <!--@mbg.generated-->
+    update monthly_work_info
+    <set>
+      <if test="employeeId != null">
+        employee_id = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        "date" = #{date,jdbcType=DATE},
+      </if>
+      <if test="filePath != null">
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=DATE},
+      </if>
+    </set>
+    where monthly_work_info_id = #{monthlyWorkInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="jp.co.intellisea.oc.web.sales.entity.MonthlyWorkInfo">
+    <!--@mbg.generated-->
+    update monthly_work_info
+    set employee_id = #{employeeId,jdbcType=INTEGER},
+      "date" = #{date,jdbcType=DATE},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      note = #{note,jdbcType=DATE}
+    where monthly_work_info_id = #{monthlyWorkInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>

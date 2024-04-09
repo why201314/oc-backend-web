@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>取引先登録</div>
+	
+	<form action="account_regist_confirm" method="post"  enctype="multipart/form-data">
+	<br /><br />
+	
+	<table>
+		<tr>
+			<td>取引先名</td><td><input name="name" id="name" type="text" /></td>
+			
+		</tr>
+		<tr>
+			<td>住所1</td><td><input name="address1" id="address1" type="text" /></td>
+			
+		</tr>
+		<tr>
+			<td>住所2</td><td><input name="address2" id="address2" type="text" /></td>
+		</tr>
+		<tr>
+			<td>住所3</td><td><input name="address3" id="address3" type="text" /></td>
+		</tr>
+		<tr>
+			<td>ホームページ</td><td><input name="homepage" id="homepage" type="text" /></td>
+		</tr>
+		<tr>
+			<td>上場区分</td><td><input name="ipc_type" id="ipc_type" type="radio" value="1"/>上場
+				<input name="ipc_type" id="ipc_type" type="radio" value="0"/>非上場
+			</td>
+		</tr>
+	</table>
+	
+	<div><input type="submit" value="登録"/></div>
+	</form>
+</body>
+</html>
