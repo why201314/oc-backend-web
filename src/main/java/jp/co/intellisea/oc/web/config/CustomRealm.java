@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
-public class MyRealm extends AuthorizingRealm {
+public class CustomRealm extends AuthorizingRealm {
 
     // 重写认证方法，用于验证用户身份
     @Override

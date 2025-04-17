@@ -9,6 +9,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class AdminController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/login/", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public JSONObject loginStatus(HttpServletRequest req, HttpSession session,
                                      @RequestParam("username") String username,
                                      @RequestParam("password") String password
@@ -58,4 +59,6 @@ public class AdminController {
             return "User is not authenticated.";
         }
     }
+
+
 }

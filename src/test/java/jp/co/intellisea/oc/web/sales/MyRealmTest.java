@@ -1,6 +1,6 @@
 package jp.co.intellisea.oc.web.sales;
 
-import jp.co.intellisea.oc.web.config.MyRealm;
+import jp.co.intellisea.oc.web.config.CustomRealm;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.mgt.DefaultSecurityManager;
@@ -16,7 +16,7 @@ public class MyRealmTest {
     @Before
     public void setUp() {
         // 创建自定义 Realm 实例
-        MyRealm realm = new MyRealm();
+        CustomRealm realm = new CustomRealm();
 
         // 设置 SecurityManager
         securityManager = new DefaultSecurityManager();
