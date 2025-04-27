@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="jp.co.intellisea.oc.web.sales.entity.Contact">
     <!--@mbg.generated-->
     <!--@Table contact-->
-    <id column="contact_id" jdbcType="INTEGER" property="contactId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <id column="id" jdbcType="INTEGER" property="contactId" />
+    <result column="first_name" jdbcType="VARCHAR" property="name" />
     <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
     <result column="mail" jdbcType="VARCHAR" property="mail" />
     <result column="duties" jdbcType="VARCHAR" property="duties" />
@@ -18,7 +18,7 @@
     <!--@mbg.generated-->
     select
     <include refid="Base_Column_List" />
-    from contact
+    from t_contact
     where
     lower(name) like concat('%', lower(#{search}), '%')
     or lower(phone_number) like concat('%', lower(#{search}), '%')
@@ -29,24 +29,24 @@
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
-    from contact
+    from t_contact
     where contact_id = #{contactId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
-    delete from contact
+    delete from t_contact
     where contact_id = #{contactId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="jp.co.intellisea.oc.web.sales.entity.Contact">
     <!--@mbg.generated-->
-    insert into contact (contact_id, "name", phone_number, 
+    insert into t_contact (contact_id, "name", phone_number, 
       mail, duties)
     values (#{contactId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
       #{mail,jdbcType=VARCHAR}, #{duties,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="jp.co.intellisea.oc.web.sales.entity.Contact">
     <!--@mbg.generated-->
-    insert into contact
+    insert into t_contact
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="contactId != null">
         contact_id,
@@ -84,7 +84,7 @@
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="jp.co.intellisea.oc.web.sales.entity.Contact">
     <!--@mbg.generated-->
-    update contact
+    update t_contact
     <set>
       <if test="name != null">
         "name" = #{name,jdbcType=VARCHAR},
@@ -103,7 +103,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="jp.co.intellisea.oc.web.sales.entity.Contact">
     <!--@mbg.generated-->
-    update contact
+    update t_contact
     set "name" = #{name,jdbcType=VARCHAR},
       phone_number = #{phoneNumber,jdbcType=VARCHAR},
       mail = #{mail,jdbcType=VARCHAR},
@@ -114,6 +114,6 @@
   <select id="allContact" resultMap="BaseResultMap">
 
     select *
-    from contact
+    from t_contact
   </select>
 </mapper>

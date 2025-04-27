@@ -27,7 +27,11 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contact> allContact() { return contactMapper.allContact(); }
+    public List<Contact> allContact() {
+        List<Contact> contacts = contactMapper.allContact(); 
+        System.out.println(contacts);
+        return contacts; 
+    }
 
     @Override
     public Contact selectContactByPrimaryKey(Integer contactId) { return contactMapper.selectByPrimaryKey(contactId); }

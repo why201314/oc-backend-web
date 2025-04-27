@@ -22,17 +22,17 @@ public class CustomRealm extends AuthorizingRealm {
         String username = upToken.getUsername();
 
         // 从 HttpSession 中获取管理员信息
-        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
-        HttpSession session = request.getSession();
-        String storedUsername = (String) session.getAttribute("username");
-        System.out.println(storedUsername);
+        // HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        // HttpSession session = request.getSession();
+        // String storedUsername = (String) session.getAttribute("username");
+        // System.out.println("storedUsername" + storedUsername);
         // 验证用户名
-        if (storedUsername != null && storedUsername.equals(username)) {
+        //if (storedUsername != null && storedUsername.equals(username)) {
             // 这里省略密码验证，你可以根据需要自行实现
             return new SimpleAuthenticationInfo(username, upToken.getPassword(), getName());
-        } else {
-            throw new UnknownAccountException("用户名不存在或不匹配");
-        }
+        // } else {
+        //     throw new UnknownAccountException("用户名不存在或不匹配");
+        // }
     }
 
     // 重写授权方法，用于授权
@@ -43,6 +43,8 @@ public class CustomRealm extends AuthorizingRealm {
         // 添加角色和权限信息，根据需要进行配置
         authorizationInfo.addRole("admin");
         authorizationInfo.addStringPermission("admin:manage");
+
+        System.out.println("authorizationInfo" + authorizationInfo);
         return authorizationInfo;
     }
 }

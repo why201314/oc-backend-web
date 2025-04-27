@@ -40,7 +40,7 @@ public class ContactController {
         return new ErrorMessage("add contact error.").getMessage();
     }
 
-    @RequestMapping(value = "/contact", method = RequestMethod.GET)
+    @RequestMapping(value = "/contact")
     public JSONObject allContact(){return new  SuccessMessage< List<Contact>>(null, contactService.allContact()).getMessage();}
 
 

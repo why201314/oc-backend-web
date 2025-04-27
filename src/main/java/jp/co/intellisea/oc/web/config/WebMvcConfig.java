@@ -12,6 +12,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
+                //.allowedOrigins("*")
                 .allowedMethods("*")
                 .allowCredentials(true)
                 .exposedHeaders("*");
@@ -20,10 +21,18 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private LoginInterceptor loginInterceptor;
 
+    @Autowired
+    private CookieInterceptor cookieInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
-                .addPathPatterns("/protected/**")   // 需要拦截的路径
-                .excludePathPatterns("/login", "/register", "/css/**", "/js/**"); // 放行路径
+                .addPathPatterns("/contact")   // 需要拦截的路径
+                .excludePathPatterns("/login","/index",  "/login2", "/logout2", "/register", "/css/**", "/js/**"); // 放行路径
+       
+        registry.addInterceptor(cookieInterceptor)
+        .addPathPatterns("/**")   // 需要拦截的路径
+        .excludePathPatterns("/register", "/css/**", "/js/**"); // 放行路径
+
     }
 }

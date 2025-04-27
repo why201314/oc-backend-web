@@ -4,10 +4,11 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class ShiroConfig {
 
     @Bean
@@ -19,6 +20,11 @@ public class ShiroConfig {
     public DefaultWebSecurityManager securityManager(CustomRealm customRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(customRealm);
+
+        // Set the web session manager
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        securityManager.setSessionManager(sessionManager);
+
         SecurityUtils.setSecurityManager(securityManager); // Important!
         return securityManager;
     }
@@ -28,6 +34,8 @@ public class ShiroConfig {
         DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
         chainDefinition.addPathDefinition("/login", "anon"); // 登录接口无需认证
         chainDefinition.addPathDefinition("/js/**", "anon"); // 登录接口无需认证
+        chainDefinition.addPathDefinition("/login2", "anon"); // 登录接口无需认证
+        chainDefinition.addPathDefinition("/index", "anon"); // 登录接口无需认证
         chainDefinition.addPathDefinition("/css/**", "anon"); // 登录接口无需认证
         chainDefinition.addPathDefinition("/**", "authc");   // 其他路径需要认证
         return chainDefinition;
