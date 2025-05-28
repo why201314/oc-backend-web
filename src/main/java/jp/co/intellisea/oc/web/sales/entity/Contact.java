@@ -1,9 +1,16 @@
 package jp.co.intellisea.oc.web.sales.entity;
 
+import lombok.Data;
+
+@Data
 public class Contact {
     private Integer contactId;
 
     private String name;
+
+    private String firstName;
+
+    private String lastName;
 
     private String phoneNumber;
 

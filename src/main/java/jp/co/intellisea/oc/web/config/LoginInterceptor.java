@@ -53,6 +53,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     
         // Subject subject = SecurityUtils.getSubject();
         // Session shiroSession = subject.getSession();
+        if(session == null) {
+            System.out.println("session is null");
+            response.sendRedirect("/index");
+            return false;
+        }
         if(session.getAttribute("username") != null){
             System.out.println("isAuthenticated: true");
             return true;

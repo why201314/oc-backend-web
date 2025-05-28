@@ -5,6 +5,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import jp.co.intellisea.oc.web.sales.dao.ContactMapper;
 import jp.co.intellisea.oc.web.sales.entity.Contact;
@@ -49,6 +50,7 @@ public class ContactServiceImpl implements ContactService {
     public byte[] generateContactPdfFromContact() {
         // 获取数据库中的所有联系人
         List<Contact> contacts = contactMapper.allContact();
+        System.out.println("contact size" + contacts.size());
 
         // 创建一个内存中的 PDF 输出流
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -61,16 +63,23 @@ public class ContactServiceImpl implements ContactService {
             document.open();  // 打开文档以便写入内容
 
             // 创建一个表格来展示联系人信息，假设 Contact 有 4 个字段：ID, 姓名, 电话, 邮箱
-            PdfPTable table = new PdfPTable(4);  // 4 列表格
+            PdfPTable table = new PdfPTable(5);  // 4 列表格
             table.addCell("ID");
-            table.addCell("Name");
+            table.addCell("firstName");
+            table.addCell("lastName");
             table.addCell("Phone");
             table.addCell("Email");
 
             // 遍历联系人数据并将其填充到表格中
+            if (contacts == null || contacts.isEmpty()) {
+                document.add(new Paragraph("无联系人数据"));  // 或者添加提示信息
+            }
+
             for (Contact contact : contacts) {
+                System.out.println(contact);
                 table.addCell(contact.getContactId().toString());
-                table.addCell(contact.getName());
+                table.addCell(contact.getFirstName());
+                table.addCell(contact.getLastName());
                 table.addCell(contact.getPhoneNumber());
                 table.addCell(contact.getMail());
             }

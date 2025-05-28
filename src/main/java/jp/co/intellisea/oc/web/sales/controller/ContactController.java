@@ -3,15 +3,21 @@ package jp.co.intellisea.oc.web.sales.controller;
 import com.alibaba.fastjson.JSONObject;
 import jp.co.intellisea.oc.web.sales.common.ErrorMessage;
 import jp.co.intellisea.oc.web.sales.common.SuccessMessage;
+import jp.co.intellisea.oc.web.sales.constants.CommonConstants;
 import jp.co.intellisea.oc.web.sales.entity.Contact;
 import jp.co.intellisea.oc.web.sales.service.impl.ContactServiceImpl;
+
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -23,14 +29,16 @@ public class ContactController {
     @RequestMapping(value = "/contact/add", method = RequestMethod.POST)
     public JSONObject addContact(HttpServletRequest req,
                                  @RequestParam("contact_id") Integer contactId,
-                                 @RequestParam("name") String name,
+                                 @RequestParam("firstName") String firstName,
+                                 @RequestParam("lastName") String lastName,
                                  @RequestParam("phone_number") String phoneNumber,
                                  @RequestParam("mail") String mail,
                                  @RequestParam("duties") String duties
                            ){
         Contact contact = new Contact();
         contact.setContactId(contactId);
-        contact.setName(name);
+        contact.setFirstName(firstName);
+        contact.setLastName(lastName);
         contact.setPhoneNumber(phoneNumber);
         contact.setMail(mail);
         contact.setDuties(duties);
@@ -89,10 +97,14 @@ public class ContactController {
         }
 
         // 设置响应头，指示这是一个 PDF 文件
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=contacts.pdf");
-        headers.add("Content-Type", "application/pdf");
-
+        // HttpHeaders headers = new HttpHeaders();
+        // headers.add("Content-Disposition", "inline; filename=contacts" + DateFormatUtils.format(new Date(), CommonConstants.DATE_FORMATYYMMDD) +".pdf");
+        // headers.add("Content-Type", "application/pdf");
+         HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDisposition(ContentDisposition.builder("attachment")
+                .filename("contacts" + DateFormatUtils.format(new Date(), CommonConstants.DATE_FORMATYYMMDD) +".pdf")
+                .build());
         // 返回 PDF 内容和相应的 HTTP 状态码
         return new ResponseEntity<>(pdfContent, headers, HttpStatus.OK);
     }

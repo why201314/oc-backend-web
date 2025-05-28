@@ -30,9 +30,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/contact")   // 需要拦截的路径
                 .excludePathPatterns("/login","/index",  "/login2", "/logout2", "/register", "/css/**", "/js/**"); // 放行路径
        
-        registry.addInterceptor(cookieInterceptor)
-        .addPathPatterns("/**")   // 需要拦截的路径
-        .excludePathPatterns("/register", "/css/**", "/js/**"); // 放行路径
+        // registry.addInterceptor(cookieInterceptor)
+        // .addPathPatterns("/**")   // 需要拦截的路径
+        // .excludePathPatterns("/register", "/css/**", "/js/**"); // 放行路径
 
     }
 }

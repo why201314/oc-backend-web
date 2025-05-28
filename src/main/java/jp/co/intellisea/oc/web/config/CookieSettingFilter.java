@@ -72,8 +72,8 @@ public class CookieSettingFilter extends OncePerRequestFilter {
         
         if(session == null || session.getId() == null){
             System.out.println("session is null， sendRedirect to index");
-            //response.sendRedirect("/index");
-            //return;
+            response.sendRedirect("/index");
+            return;
         } else {
 
             ResponseCookie cookie = ResponseCookie.from("JSESSIONID", session.getId())
