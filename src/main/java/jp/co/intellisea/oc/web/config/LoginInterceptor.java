@@ -102,7 +102,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
                            Object handler, Exception  ex) throws Exception {
         String contextPath = request.getContextPath();
-        String sessionId = request.getSession().getId();
+        String sessionId = request.getSession(false).getId();
 
         // Build cookie with attributes
         ResponseCookie cookie = ResponseCookie.from("JSESSIONID", sessionId)
@@ -111,7 +111,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                 .path(contextPath)
                 .sameSite("None") // Or "None" for cross-site
                 .build();
-            System.out.println("afterCompletion is executed");
+            System.out.println("LoginInterceptor afterCompletion is executed");
 
         response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
     }

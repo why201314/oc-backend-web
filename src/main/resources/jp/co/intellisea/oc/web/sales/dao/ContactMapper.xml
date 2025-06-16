@@ -105,7 +105,9 @@
   <update id="updateByPrimaryKey" parameterType="jp.co.intellisea.oc.web.sales.entity.Contact">
     <!--@mbg.generated-->
     update t_contact
-    set "first_name" = #{name,jdbcType=VARCHAR},
+    set 
+      last_name = #{lastName,jdbcType=VARCHAR},
+      first_name = #{firstName,jdbcType=VARCHAR},
       phone_number = #{phoneNumber,jdbcType=VARCHAR},
       email = #{mail,jdbcType=VARCHAR},
       employee_type = #{duties,jdbcType=VARCHAR}

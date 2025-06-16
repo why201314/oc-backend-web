@@ -70,22 +70,27 @@ public class ContactController {
     @RequestMapping(value = "/contact/update", method = RequestMethod.POST)
     public JSONObject updateContact(HttpServletRequest req,
                                  @RequestParam("contact_id") Integer contactId,
-                                 @RequestParam("name") String name,
+                                 @RequestParam("firstName") String firstName,
+                                 @RequestParam("lastName") String lastName,
                                  @RequestParam("phone_number") String phoneNumber,
                                  @RequestParam("mail") String mail,
                                  @RequestParam("duties") String duties
     ){
         Contact contact = new Contact();
         contact.setContactId(contactId);
-        contact.setName(name);
+        contact.setFirstName(firstName);
+        contact.setLastName(lastName);
         contact.setPhoneNumber(phoneNumber);
         contact.setMail(mail);
         contact.setDuties(duties);
         boolean res = contactService.updatePrimaryKey(contact);
-        if(res)
-            return new SuccessMessage("add contact successful!", true).getMessage();
-        return new ErrorMessage("add contact error.").getMessage();
+        if(res) {
+            
+            return new SuccessMessage("update contact successful!", true).getMessage();
+        }
+        return new ErrorMessage("update contact error.").getMessage();
     }
+    
     @GetMapping("/contact/pdfOfContact")
     public ResponseEntity<byte[]> generateContactPdf() throws IOException {
         // 调用 service 层的 generateContactPdfFromContact 方法生成 PDF

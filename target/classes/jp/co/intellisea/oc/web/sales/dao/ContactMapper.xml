@@ -5,14 +5,15 @@
     <!--@mbg.generated-->
     <!--@Table contact-->
     <id column="id" jdbcType="INTEGER" property="contactId" />
-    <result column="first_name" jdbcType="VARCHAR" property="name" />
+    <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+    <result column="last_name" jdbcType="VARCHAR" property="lastName" />
     <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
-    <result column="mail" jdbcType="VARCHAR" property="mail" />
-    <result column="duties" jdbcType="VARCHAR" property="duties" />
+    <result column="email" jdbcType="VARCHAR" property="mail" />
+    <result column="employee_type" jdbcType="VARCHAR" property="duties" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    contact_id, "name", phone_number, mail, duties
+    id, "first_name", phone_number, email, employee_type
   </sql>
   <select id="selectByFuzzySearch" parameterType="java.lang.String" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -20,28 +21,28 @@
     <include refid="Base_Column_List" />
     from t_contact
     where
-    lower(name) like concat('%', lower(#{search}), '%')
+    lower(first_name) like concat('%', lower(#{search}), '%')
     or lower(phone_number) like concat('%', lower(#{search}), '%')
-    or lower(mail) like concat('%', lower(#{search}), '%')
-    or lower(duties) like concat('%', lower(#{search}), '%')
+    or lower(email) like concat('%', lower(#{search}), '%')
+    or lower(employee_type) like concat('%', lower(#{search}), '%')
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from t_contact
-    where contact_id = #{contactId,jdbcType=INTEGER}
+    where id = #{contactId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from t_contact
-    where contact_id = #{contactId,jdbcType=INTEGER}
+    where id = #{contactId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="jp.co.intellisea.oc.web.sales.entity.Contact">
     <!--@mbg.generated-->
-    insert into t_contact (contact_id, "name", phone_number, 
-      mail, duties)
-    values (#{contactId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
+    insert into t_contact (id, first_name, last_name ,phone_number, 
+      email, employee_type)
+    values (#{contactId,jdbcType=INTEGER}, #{firstName,jdbcType=VARCHAR}, #{lastName,jdbcType=VARCHAR},  #{phoneNumber,jdbcType=VARCHAR}, 
       #{mail,jdbcType=VARCHAR}, #{duties,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="jp.co.intellisea.oc.web.sales.entity.Contact">
@@ -49,10 +50,10 @@
     insert into t_contact
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="contactId != null">
-        contact_id,
+        id,
       </if>
       <if test="name != null">
-        "name",
+        "first_name",
       </if>
       <if test="phoneNumber != null">
         phone_number,
@@ -93,22 +94,24 @@
         phone_number = #{phoneNumber,jdbcType=VARCHAR},
       </if>
       <if test="mail != null">
-        mail = #{mail,jdbcType=VARCHAR},
+        email = #{mail,jdbcType=VARCHAR},
       </if>
       <if test="duties != null">
-        duties = #{duties,jdbcType=VARCHAR},
+        employee_type = #{duties,jdbcType=VARCHAR},
       </if>
     </set>
-    where contact_id = #{contactId,jdbcType=INTEGER}
+    where id = #{contactId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="jp.co.intellisea.oc.web.sales.entity.Contact">
     <!--@mbg.generated-->
     update t_contact
-    set "name" = #{name,jdbcType=VARCHAR},
+    set 
+      last_name = #{lastName,jdbcType=VARCHAR},
+      first_name = #{firstName,jdbcType=VARCHAR},
       phone_number = #{phoneNumber,jdbcType=VARCHAR},
-      mail = #{mail,jdbcType=VARCHAR},
-      duties = #{duties,jdbcType=VARCHAR}
-    where contact_id = #{contactId,jdbcType=INTEGER}
+      email = #{mail,jdbcType=VARCHAR},
+      employee_type = #{duties,jdbcType=VARCHAR}
+    where id = #{contactId,jdbcType=INTEGER}
   </update>
 
   <select id="allContact" resultMap="BaseResultMap">

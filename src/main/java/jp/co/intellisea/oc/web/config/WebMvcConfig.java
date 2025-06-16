@@ -27,12 +27,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
-                .addPathPatterns("/contact")   // 需要拦截的路径
+                .addPathPatterns("/**")   // 需要拦截的路径
                 .excludePathPatterns("/login","/index",  "/login2", "/logout2", "/register", "/css/**", "/js/**"); // 放行路径
        
-        // registry.addInterceptor(cookieInterceptor)
-        // .addPathPatterns("/**")   // 需要拦截的路径
-        // .excludePathPatterns("/register", "/css/**", "/js/**"); // 放行路径
+        registry.addInterceptor(cookieInterceptor)
+        .addPathPatterns("/**")   // 需要拦截的路径
+        .excludePathPatterns("/register", "/css/**", "/js/**"); // 放行路径
 
     }
 }

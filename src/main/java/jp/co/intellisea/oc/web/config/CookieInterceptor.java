@@ -14,7 +14,7 @@ public class CookieInterceptor  implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
                            Object handler, ModelAndView modelAndView) throws Exception {
         String contextPath = request.getContextPath();
-        String sessionId = request.getSession().getId();
+        String sessionId = request.getSession(false).getId();
 
         // Build cookie with attributes
         ResponseCookie cookie = ResponseCookie.from("JSESSIONID", sessionId)
@@ -32,7 +32,7 @@ public class CookieInterceptor  implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
                            Object handler, Exception  ex) throws Exception {
         String contextPath = request.getContextPath();
-        String sessionId = request.getSession().getId();
+        String sessionId = request.getSession(false).getId();
 
         // Build cookie with attributes
         ResponseCookie cookie = ResponseCookie.from("JSESSIONID", sessionId)
